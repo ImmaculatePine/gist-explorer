@@ -26,7 +26,7 @@ export function useToken(token) {
 
     const gh = new GitHub({token: token});
     const me = gh.getUser();
-    me.getProfile().then(
+    return me.getProfile().then(
       (json) => {
         dispatch({
           type: AUTHENTICATE_SUCCESS,

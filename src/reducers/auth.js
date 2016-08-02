@@ -7,7 +7,7 @@ const initialState = {
   user: {}
 };
 
-export default function userReducer(state = initialState, { type, payload }) {
+export default function userReducer(state = initialState, { type, payload } = {}) {
   switch (type) {
     case USE_TOKEN:
       return {

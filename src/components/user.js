@@ -2,10 +2,8 @@ import React, { PropTypes } from 'react';
 
 let User = ({ user, onSignOutClick }) => {
   return <div>
-    <p>Hi, {user.name}</p>
-    <p>
-      <button onClick={onSignOutClick}>Sign out</button>
-    </p>
+    <p className='greetings'>Hi, {user.name}</p>
+    <button onClick={onSignOutClick}>Sign out</button>
   </div>
 }
 
