@@ -1,0 +1,4 @@
+export const USE_TOKEN = 'USE_TOKEN';
+export const AUTHENTICATE_SUCCESS = 'AUTHENTICATE_SUCCESS';
+export const AUTHENTICATE_FAIL = 'AUTHENTICATE_FAIL';
+export const SIGN_OUT = 'SIGN_OUT';
