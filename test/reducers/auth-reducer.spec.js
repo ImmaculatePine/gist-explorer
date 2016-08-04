@@ -46,7 +46,9 @@ describe('auth reducer', () => {
       payload: {
         id: 1,
         login: 'defunkt',
-        name: 'Chris Wanstrath'
+        name: 'Chris Wanstrath',
+        avatar_url: 'https://avatars0.githubusercontent.com/u/2?v=3&s=400',
+        html_url: 'https://github.com/defunkt'
       }
     }
     const expectedState = {
@@ -55,7 +57,9 @@ describe('auth reducer', () => {
       user: {
         id: 1,
         login: 'defunkt',
-        name: 'Chris Wanstrath'
+        name: 'Chris Wanstrath',
+        avatarUrl: 'https://avatars0.githubusercontent.com/u/2?v=3&s=400',
+        url: 'https://github.com/defunkt'
       }
     }
     expect(reducer(intialState, action)).to.eql(expectedState)

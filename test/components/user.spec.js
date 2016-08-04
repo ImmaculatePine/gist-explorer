@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import User from '../../src/components/user'
 
 function setup() {
@@ -11,7 +11,7 @@ function setup() {
     onSignOutClick: () => {}
   }
 
-  const wrapper = shallow(<User {...props} />)
+  const wrapper = mount(<User {...props} />)
 
   return {
     props,
@@ -21,9 +21,17 @@ function setup() {
 
 describe('components', () => {
   describe('User', () => {
-    it('renders self with correct properties', () => {
+    it('renders self', () => {
       const { wrapper } = setup()
-      expect(wrapper.find('.greetings').text()).to.equal('Hi, Alexander')
+      expect(wrapper.find('Header')).to.be.defined
+      expect(wrapper.find('Sidebar')).to.be.defined
+      expect(wrapper.find('Footer')).to.be.defined
+    })
+
+    it('changes body class', () => {
+      setup()
+      const body = document.getElementsByTagName('body')[0]
+      expect(body.className).to.equal('hold-transition skin-blue sidebar-mini')
     })
   })
 })

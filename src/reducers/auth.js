@@ -24,7 +24,9 @@ export default function userReducer(state = initialState, { type, payload } = {}
         user: {
           id: payload.id,
           login: payload.login,
-          name: payload.name
+          name: payload.name,
+          avatarUrl: payload.avatar_url,
+          url: payload.html_url
         }
       };
 
