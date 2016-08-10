@@ -3,7 +3,7 @@ let config = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  config['apiHost'] = '';
+  config['apiHost'] = 'http://api.gist-explorer.whoindie.com';
 } else {
   config['apiHost'] = 'http://localhost:3000';
 }
