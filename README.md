@@ -6,8 +6,13 @@ React.js viewer for your gists that allows to label them.
 
 It is split into 2 separate projects:
 
-  * the first one is a React.js application
+  * the first one is a React.js application which is served by Express.js
   * and the second one is a Rails backend that serves API for labels and manages GitHub authentication
+
+## Technologies stack
+
+Application: React + Redux
+Tests: Enzyme + Mocha + Chai
 
 ## Authentication
 
@@ -74,3 +79,9 @@ Run `npm start` from the command line and visit `http://localhost:3001` in your 
 # Tests
 
 Use `npm test` command to run tests.
+
+# Next steps
+
+* Optimize webpack config for production builds
+* Add router
+* Improve UI
