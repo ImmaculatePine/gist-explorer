@@ -12,12 +12,12 @@ export default class GistsList extends Component {
             Loading...
           </div>
         </div>
-      )
+      );
     }
 
     const gists = this.props.gists.map(gist => {
       const isActive = gist.id === selectedId;
-      return <Gist key={gist.id} gist={gist} isActive={isActive} onClick={onGistClick} />
+      return (<Gist key={gist.id} gist={gist} isActive={isActive} onClick={onGistClick} />);
     });
 
     return (
@@ -28,7 +28,7 @@ export default class GistsList extends Component {
           </ul>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -36,5 +36,5 @@ GistsList.propTypes = {
   gists: PropTypes.array.isRequired,
   selectedId: PropTypes.string,
   isFetching: PropTypes.bool.isRequired,
-  onGistClick: PropTypes.func.isRequired
+  onGistClick: PropTypes.func.isRequired,
 };

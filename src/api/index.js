@@ -15,7 +15,7 @@ export default class API {
       { headers: this._headers() },
       successCallback,
       failureCallback
-    )
+    );
   }
 
   addLabel(options = {}, successCallback, failureCallback) {
@@ -25,12 +25,12 @@ export default class API {
         headers: this._headers(),
         method: 'POST',
         body: JSON.stringify({
-          label: options
-        })
+          label: options,
+        }),
       },
       successCallback,
       failureCallback
-    )
+    );
   }
 
   deleteLabel(labelId, successCallback, failureCallback) {
@@ -38,11 +38,11 @@ export default class API {
       `${config.apiHost}/labels/${labelId}`,
       {
         headers: this._headers(),
-        method: 'DELETE'
+        method: 'DELETE',
       },
       successCallback,
       failureCallback
-    )
+    );
   }
 
   toggleLabelOnGist(labelId, gistId, successCallback, failureCallback) {
@@ -53,32 +53,32 @@ export default class API {
         method: 'POST',
         body: JSON.stringify({
           gist: {
-            id: gistId
-          }
-        })
+            id: gistId,
+          },
+        }),
       },
       successCallback,
       failureCallback
-    )
+    );
   }
 
   _headers() {
     return {
-      'Authorization': `Token token="${this.token}"`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json' 
-    }
+      Authorization: `Token token="${this.token}"`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
   }
 
   _makeRequest(url, options, successCallback, failureCallback) {
     return fetch(url, options)
       .then((response) => {
         if (response.status > 400) {
-          throw new Error(response.statusText)
+          throw new Error(response.statusText);
         }
-        return response.json()
+        return response.json();
       })
       .then(data => successCallback(data))
-      .catch(error => failureCallback(error.message))
+      .catch(error => failureCallback(error.message));
   }
 }

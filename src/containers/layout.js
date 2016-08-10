@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/auth-actions';
-import { AUTH_STATE_UNKNOWN, AUTH_STATE_GUEST, AUTH_STATE_AUTHENTICATED } from '../constants/auth-states';
+import { AUTH_STATE_GUEST, AUTH_STATE_AUTHENTICATED } from '../constants/auth-states';
 
 // Import components
 import LoadingPage from '../components/loading-page';
@@ -11,34 +11,40 @@ import AppPage from '../containers/app-page';
 
 export class Layout extends Component {
   componentWillMount() {
-    this.props.authActions.readTokenFromCookies();
+    const { readTokenFromCookies } = this.props.authActions;
+    readTokenFromCookies();
   }
 
   render() {
-    const { auth } = this.props
+    const { auth } = this.props;
 
     switch (auth.state) {
-      case AUTH_STATE_UNKNOWN:
-        return <LoadingPage />
+    case AUTH_STATE_GUEST:
+      return (<LoginPage />);
 
-      case AUTH_STATE_GUEST:
-        return <LoginPage />
+    case AUTH_STATE_AUTHENTICATED:
+      return (<AppPage />);
 
-      case AUTH_STATE_AUTHENTICATED:
-        return <AppPage />
+    default:
+      return (<LoadingPage />);
     }
   }
 }
 
+Layout.propTypes = {
+  auth: PropTypes.object.isRequired,
+  authActions: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
-    auth: state.auth
-  }
+    auth: state.auth,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    authActions: bindActionCreators(authActions, dispatch)
+    authActions: bindActionCreators(authActions, dispatch),
   };
 }
 

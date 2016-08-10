@@ -7,8 +7,8 @@ const labelSchema = new Schema('labels');
 
 function labelsRequest() {
   return {
-    type: actionTypes.LABELS_REQUEST
-  }
+    type: actionTypes.LABELS_REQUEST,
+  };
 }
 
 function labelsSuccess(json) {
@@ -18,37 +18,37 @@ function labelsSuccess(json) {
   );
   return {
     type: actionTypes.LABELS_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
 
 function labelsFailure(error) {
   return {
     type: actionTypes.LABELS_FAILURE,
-    payload: error
-  }
+    payload: error,
+  };
 }
 
 // Fetches a list of labels for the current user.
 export function fetchLabels(token) {
   return dispatch => {
-    dispatch(labelsRequest())
+    dispatch(labelsRequest());
 
     const api = new API(token);
     return api.getLabels(
-      (json) => { dispatch(labelsSuccess(json)) },
-      (error) => { dispatch(labelsFailure(error)) }
-    )
-  }
+      (json) => { dispatch(labelsSuccess(json)); },
+      (error) => { dispatch(labelsFailure(error)); }
+    );
+  };
 }
 
 function addLabelRequest(name) {
   return {
     type: actionTypes.ADD_LABEL_REQUEST,
     payload: {
-      name: name
-    }
-  }
+      name,
+    },
+  };
 }
 
 function addLabelSuccess(json) {
@@ -58,15 +58,15 @@ function addLabelSuccess(json) {
   );
   return {
     type: actionTypes.ADD_LABEL_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
 
 function addLabelFailure(error) {
   return {
     type: actionTypes.ADD_LABEL_FAILURE,
-    payload: error
-  }
+    payload: error,
+  };
 }
 
 // Adds new label to the library.
@@ -76,18 +76,18 @@ export function addLabel(token, name) {
 
     const api = new API(token);
     return api.addLabel(
-      { name: name },
-      (json) => { dispatch(addLabelSuccess(json)) },
-      (error) => { dispatch(addLabelFailure(error)) }
-    )
-  }
+      { name },
+      (json) => { dispatch(addLabelSuccess(json)); },
+      (error) => { dispatch(addLabelFailure(error)); }
+    );
+  };
 }
 
 function deleteLabelRequest(labelId) {
   return {
     type: actionTypes.DELETE_LABEL_REQUEST,
-    payload: labelId
-  }
+    payload: labelId,
+  };
 }
 
 function deleteLabelSuccess(json) {
@@ -97,15 +97,15 @@ function deleteLabelSuccess(json) {
   );
   return {
     type: actionTypes.DELETE_LABEL_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
 
 function deleteLabelFailure(error) {
   return {
     type: actionTypes.DELETE_LABEL_FAILURE,
-    payload: error
-  }
+    payload: error,
+  };
 }
 
 // Deletes label from the library.
@@ -116,10 +116,10 @@ export function deleteLabel(token, labelId) {
     const api = new API(token);
     return api.deleteLabel(
       labelId,
-      (json) => { dispatch(deleteLabelSuccess(json)) },
-      (error) => { dispatch(deleteLabelFailure(error)) }
-    )
-  }
+      (json) => { dispatch(deleteLabelSuccess(json)); },
+      (error) => { dispatch(deleteLabelFailure(error)); }
+    );
+  };
 }
 
 function toggleLabelOnGistRequest(labelId, gistId) {
@@ -127,9 +127,9 @@ function toggleLabelOnGistRequest(labelId, gistId) {
     type: actionTypes.TOGGLE_LABLE_ON_GIST_REQUEST,
     payload: {
       labelId,
-      gistId
-    }
-  }
+      gistId,
+    },
+  };
 }
 
 function toggleLabelOnGistSuccess(json) {
@@ -139,15 +139,15 @@ function toggleLabelOnGistSuccess(json) {
   );
   return {
     type: actionTypes.TOGGLE_LABLE_ON_GIST_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
 
 function toggleLabelOnGistFailure(error) {
   return {
     type: actionTypes.TOGGLE_LABLE_ON_GIST_FAILURE,
-    payload: error
-  }
+    payload: error,
+  };
 }
 
 // Toggles the specified label on the specified gist.
@@ -161,10 +161,10 @@ export function toggleLabelOnGist(token, labelId, gistId) {
     return api.toggleLabelOnGist(
       labelId,
       gistId,
-      (json) => { dispatch(toggleLabelOnGistSuccess(json)) },
-      (error) => { dispatch(toggleLabelOnGistFailure(error)) }
-    )
-  }
+      (json) => { dispatch(toggleLabelOnGistSuccess(json)); },
+      (error) => { dispatch(toggleLabelOnGistFailure(error)); }
+    );
+  };
 }
 
 
@@ -172,6 +172,6 @@ export function toggleLabelOnGist(token, labelId, gistId) {
 export function selectLabel(labelId) {
   return {
     type: actionTypes.SELECT_LABEL,
-    payload: labelId
-  }
+    payload: labelId,
+  };
 }

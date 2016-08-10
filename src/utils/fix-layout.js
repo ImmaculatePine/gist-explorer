@@ -15,18 +15,20 @@ export default class FixLayout {
   fix() {
     // Get window height and the wrapper height
     const neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
-    const window_height = $(window).height();
-    const sidebar_height = $('.sidebar').height();
+    const windowHeight = $(window).height();
+    const sidebarHeight = $('.sidebar').height();
 
     // Set the min-height of the content and sidebar based on the
     // the height of the document.
     if ($('body').hasClass('fixed')) {
-      $('.content-wrapper, .right-side').css('min-height', window_height - $('.main-footer').outerHeight());
+      $('.content-wrapper, .right-side').css(
+        'min-height', windowHeight - $('.main-footer').outerHeight()
+      );
     } else {
-      if (window_height >= sidebar_height) {
-        $('.content-wrapper, .right-side').css('min-height', window_height - neg);
+      if (windowHeight >= sidebarHeight) {
+        $('.content-wrapper, .right-side').css('min-height', windowHeight - neg);
       } else {
-        $('.content-wrapper, .right-side').css('min-height', sidebar_height);
+        $('.content-wrapper, .right-side').css('min-height', sidebarHeight);
       }
     }
   }

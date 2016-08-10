@@ -11,14 +11,17 @@ export default class File extends Component {
     return (
       <div className='box box-solid'>
         <div className='box-header with-border'>
-          
           <b className='file-filename'>{filename}</b>
           <br />
           <small className='file-language'>{language}</small>
-        
           <div className='box-tools'>
-            <a href={rawUrl} className='file-raw-url btn btn-box-tool' target='_blank'>
-              <i className='fa fa-external-link'></i>
+            <a
+              href={rawUrl}
+              className='file-raw-url btn btn-box-tool'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <i className='fa fa-external-link' />
             </a>
           </div>
         </div>
@@ -32,6 +35,6 @@ export default class File extends Component {
   }
 }
 
-File.propType = {
-  file: PropTypes.object.isRequired
-}
+File.propTypes = {
+  file: PropTypes.object.isRequired,
+};

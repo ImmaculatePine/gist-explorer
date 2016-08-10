@@ -12,7 +12,7 @@ import FixLayout from '../utils/fix-layout';
 
 export default class App extends Component {
   componentWillMount() {
-    this._updateBodyClass()
+    this._updateBodyClass();
   }
 
   componentDidMount() {
@@ -24,10 +24,15 @@ export default class App extends Component {
     this.fixLayout.deactivate();
   }
 
+  _updateBodyClass() {
+    const body = document.getElementsByTagName('body')[0];
+    body.className = 'hold-transition skin-blue sidebar-mini';
+  }
+
   render() {
     const {
       data, auth, gists, labels,
-      authActions, gistActions, labelsActions
+      authActions, gistActions, labelsActions,
     } = this.props;
 
     return (
@@ -72,12 +77,7 @@ export default class App extends Component {
         </div>
         <Footer />
       </div>
-    )
-  }
-
-  _updateBodyClass() {
-    const body = document.getElementsByTagName('body')[0];
-    body.className = 'hold-transition skin-blue sidebar-mini';
+    );
   }
 }
 
@@ -86,8 +86,7 @@ App.propTypes = {
   auth: PropTypes.object.isRequired,
   gists: PropTypes.object.isRequired,
   labels: PropTypes.object.isRequired,
-
   authActions: PropTypes.object.isRequired,
   gistActions: PropTypes.object.isRequired,
-  labelsActions: PropTypes.object.isRequired
-}
+  labelsActions: PropTypes.object.isRequired,
+};

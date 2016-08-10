@@ -11,9 +11,9 @@ export default class Gist extends Component {
 
     let privateIcon;
     if (!gist.public) {
-      privateIcon = <span className='pull-right'>
-        <i className='fa fa-lock'></i>
-      </span>
+      privateIcon = (<span className='pull-right'>
+        <i className='fa fa-lock' />
+      </span>);
     }
 
     let labels = <span className='no-labels'>No labels</span>;
@@ -21,23 +21,25 @@ export default class Gist extends Component {
       labels = gist.labels.map(label => label.name).join(', ');
     }
 
-    return <li className={isActive ? 'active' : ''}>
-      <a href='#' onClick={() => { onClick(gist.id) }}>
-        {privateIcon}
-        <b className='gist-title'>{title}</b>
-        <br />
-        <small className='gist-created-at'>Created {createdAtInWords}</small>
-        <p className='gist-description'>{gist.description}</p>
-        <div className='labels'>
-          <i className='fa fa-tags'></i> {labels}
-        </div>
-      </a>
-    </li>
+    return (
+      <li className={isActive ? 'active' : ''}>
+        <a href='#' onClick={() => { onClick(gist.id); }}>
+          {privateIcon}
+          <b className='gist-title'>{title}</b>
+          <br />
+          <small className='gist-created-at'>Created {createdAtInWords}</small>
+          <p className='gist-description'>{gist.description}</p>
+          <div className='labels'>
+            <i className='fa fa-tags' /> {labels}
+          </div>
+        </a>
+      </li>
+    );
   }
 }
 
 Gist.propTypes = {
   gist: PropTypes.object.isRequired,
   isActive: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };

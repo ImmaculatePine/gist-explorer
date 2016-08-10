@@ -16,15 +16,15 @@ function gistsSuccess(json) {
   );
   return {
     type: GISTS_SUCCESS,
-    payload
-  }
+    payload,
+  };
 }
 
 function gistsFailure(error) {
   return {
     type: GISTS_FAILURE,
-    payload: new Error(error)
-  }
+    payload: new Error(error),
+  };
 }
 
 // Fetches list of gist previews from Github API.
@@ -32,11 +32,11 @@ export function fetchGists(token) {
   return dispatch => {
     dispatch(gistsRequest());
 
-    const gh = new GitHub({token: token});
+    const gh = new GitHub({ token });
     const me = gh.getUser();
     return me.listGists().then(
-      (response) => { dispatch(gistsSuccess(response.data)) },
-      (error) => { dispatch(gistsFailure(error)) }
+      (response) => { dispatch(gistsSuccess(response.data)); },
+      (error) => { dispatch(gistsFailure(error)); }
     );
-  }
+  };
 }

@@ -4,15 +4,15 @@ import Layout from './layout';
 
 export default class Root extends Component {
   render() {
-    const { store } = this.props
+    const { store } = this.props;
     return (
       <Provider store={store}>
         <Layout />
       </Provider>
-    )
+    );
   }
 }
 
 Root.propTypes = {
-  store: PropTypes.object.isRequired
+  store: PropTypes.object.isRequired,
 };
