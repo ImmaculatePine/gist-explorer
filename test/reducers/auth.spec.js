@@ -13,7 +13,7 @@ describe('auth reducer', () => {
     expect(reducer()).to.eql(expectedState)
   })
 
-  it('handles USE_TOKEN action', () => {
+  it('handles AUTHENTICATE_REQUEST action', () => {
     const intialState = {
       state: authStates.AUTH_STATE_AUTHENTICATED,
       token: 'xxx',
@@ -22,7 +22,7 @@ describe('auth reducer', () => {
       }
     }
     const action = {
-      type: authActions.USE_TOKEN,
+      type: authActions.AUTHENTICATE_REQUEST,
       payload: {
         token: 'yyy'
       }
@@ -47,8 +47,8 @@ describe('auth reducer', () => {
         id: 1,
         login: 'defunkt',
         name: 'Chris Wanstrath',
-        avatar_url: 'https://avatars0.githubusercontent.com/u/2?v=3&s=400',
-        html_url: 'https://github.com/defunkt'
+        avatarUrl: 'https://avatars0.githubusercontent.com/u/2?v=3&s=400',
+        htmlUrl: 'https://github.com/defunkt'
       }
     }
     const expectedState = {
@@ -65,14 +65,14 @@ describe('auth reducer', () => {
     expect(reducer(intialState, action)).to.eql(expectedState)
   })
 
-  it('handles AUTHENTICATE_FAIL action', () => {
+  it('handles AUTHENTICATE_FAILURE action', () => {
     const intialState = {
       state: authStates.AUTH_STATE_UNKNOWN,
       token: 'yyy',
       user: {}
     }
     const action = {
-      type: authActions.AUTHENTICATE_FAIL,
+      type: authActions.AUTHENTICATE_FAILURE,
       payload: {
         error: new Error(':(')
       }

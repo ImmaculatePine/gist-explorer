@@ -10,7 +10,7 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 const GITHUB_API = 'https://api.github.com'
 
-describe('useToken(token)', () => {
+describe('authenticate(token)', () => {
   afterEach(() => {
     nock.cleanAll()
   })
@@ -26,7 +26,7 @@ describe('useToken(token)', () => {
 
     const expectedActions = [
       {
-        type: types.USE_TOKEN,
+        type: types.AUTHENTICATE_REQUEST,
         payload: {
           token: 'XYZ'
         }
@@ -43,13 +43,13 @@ describe('useToken(token)', () => {
 
     const store = mockStore({})
 
-    return store.dispatch(actions.useToken('XYZ'))
+    return store.dispatch(actions.authenticate('XYZ'))
       .then(() => {
         expect(store.getActions()).to.eql(expectedActions)
       })
   })
 
-  it('creates AUTHENTICATE_FAIL when fetching user profile has been done with error', () => {
+  it('creates AUTHENTICATE_FAILURE when fetching user profile has been done with error', () => {
     nock(GITHUB_API)
       .get('/user')
       .reply(401, {
@@ -59,13 +59,13 @@ describe('useToken(token)', () => {
 
     const expectedActions = [
       {
-        type: types.USE_TOKEN,
+        type: types.AUTHENTICATE_REQUEST,
         payload: {
           token: 'XYZ'
         }
       },
       {
-        type: types.AUTHENTICATE_FAIL,
+        type: types.AUTHENTICATE_FAILURE,
         payload: {
           error: new Error('Bad credentials')
         }
@@ -74,7 +74,7 @@ describe('useToken(token)', () => {
 
     const store = mockStore({})
 
-    return store.dispatch(actions.useToken('XYZ'))
+    return store.dispatch(actions.authenticate('XYZ'))
       .then(() => {
         expect(store.getActions()).to.eql(expectedActions)
       })

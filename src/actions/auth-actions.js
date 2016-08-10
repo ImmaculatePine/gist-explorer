@@ -1,58 +1,62 @@
-import {
-  USE_TOKEN,
-  SIGN_OUT,
-  AUTHENTICATE_SUCCESS,
-  AUTHENTICATE_FAIL
-} from '../constants/auth';
-import cookie from 'react-cookie';
-import GitHub from 'github-api';
+import * as actionTypes from '../constants/auth'
+import cookie from 'react-cookie'
+import GitHub from 'github-api'
+import { camelizeKeys } from 'humps'
 
-const COOKIE_NAME = 'gist_explorer_token';
+const COOKIE_NAME = 'gist_explorer_token'
 
-export function useToken(token) {
+function authenticateRequest(token) {
+  return {
+    type: actionTypes.AUTHENTICATE_REQUEST,
+    payload: {
+      token: token
+    }
+  }
+}
+
+function authenticateSuccess(json) {
+  return {
+    type: actionTypes.AUTHENTICATE_SUCCESS,
+    payload: camelizeKeys(json.data)
+  }
+}
+
+function authenticateFailure(error) {
+  return {
+    type: actionTypes.AUTHENTICATE_FAILURE,
+    payload: {
+      error: new Error(error.message)
+    }
+  }
+}
+
+export function authenticate(token) {
   return dispatch => {
-    dispatch({
-      type: USE_TOKEN,
-      payload: {
-        token: token
-      }
-    });
+    dispatch(authenticateRequest(token))
 
     // There is no sense to make GitHub API call
     // for an empty token
     if (!token) { 
-      return dispatch(signOut());
+      return dispatch(signOut())
     }
 
-    const gh = new GitHub({token: token});
-    const me = gh.getUser();
+    const gh = new GitHub({token: token})
+    const me = gh.getUser()
     return me.getProfile().then(
-      (json) => {
-        dispatch({
-          type: AUTHENTICATE_SUCCESS,
-          payload: json.data
-        });
-      },
-      (error) => {
-        dispatch({
-          type: AUTHENTICATE_FAIL,
-          payload: {
-            error: new Error(error)
-          }
-        });
-      }
+      (json) => { dispatch(authenticateSuccess(json)) },
+      (error) => { dispatch(authenticateFailure(error)) }
     );
   };
 }
 
 export function readTokenFromCookies() {
   const token = cookie.load(COOKIE_NAME);
-  return useToken(token);
+  return authenticate(token);
 }
 
 export function signOut() {
   cookie.remove(COOKIE_NAME);
   return {
-    type: SIGN_OUT
+    type: actionTypes.SIGN_OUT
   };
 }

@@ -1,0 +1,9 @@
+export const GISTS_REQUEST = 'GISTS_REQUEST';
+export const GISTS_SUCCESS = 'GISTS_SUCCESS';
+export const GISTS_FAILURE = 'GISTS_FAILURE';
+
+export const SELECT_GIST = 'SELECT_GIST';
+
+export const GIST_REQUEST = 'GIST_REQUEST';
+export const GIST_SUCCESS = 'GIST_SUCCESS';
+export const GIST_FAILURE = 'GIST_FAILURE';

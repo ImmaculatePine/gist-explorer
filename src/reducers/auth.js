@@ -1,40 +1,40 @@
-import { USE_TOKEN, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAIL, SIGN_OUT } from '../constants/auth';
-import { AUTH_STATE_UNKNOWN, AUTH_STATE_GUEST, AUTH_STATE_AUTHENTICATED } from '../constants/auth-states';
+import * as actionTypes from '../constants/auth';
+import * as authStates from '../constants/auth-states';
 
 const initialState = {
-  state: AUTH_STATE_UNKNOWN,
+  state: authStates.AUTH_STATE_UNKNOWN,
   token: '',
   user: {}
 };
 
 export default function userReducer(state = initialState, { type, payload } = {}) {
   switch (type) {
-    case USE_TOKEN:
+    case actionTypes.AUTHENTICATE_REQUEST:
       return {
         ...state,
-        state: AUTH_STATE_UNKNOWN,
+        state: authStates.AUTH_STATE_UNKNOWN,
         token: payload.token,
         user: {}
       };
 
-    case AUTHENTICATE_SUCCESS:
+    case actionTypes.AUTHENTICATE_SUCCESS:
       return {
         ...state,
-        state: AUTH_STATE_AUTHENTICATED,
+        state: authStates.AUTH_STATE_AUTHENTICATED,
         user: {
           id: payload.id,
           login: payload.login,
           name: payload.name,
-          avatarUrl: payload.avatar_url,
-          url: payload.html_url
+          avatarUrl: payload.avatarUrl,
+          url: payload.htmlUrl
         }
       };
 
-    case AUTHENTICATE_FAIL:
-    case SIGN_OUT:
+    case actionTypes.AUTHENTICATE_FAILURE:
+    case actionTypes.SIGN_OUT:
       return {
         ...state,
-        state: AUTH_STATE_GUEST,
+        state: authStates.AUTH_STATE_GUEST,
         token: '',
         user: {}
       };

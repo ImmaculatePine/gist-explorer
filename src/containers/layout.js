@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import * as authActions from '../actions/auth-actions';
 import { AUTH_STATE_UNKNOWN, AUTH_STATE_GUEST, AUTH_STATE_AUTHENTICATED } from '../constants/auth-states';
 
+// Import components
 import LoadingPage from '../components/loading-page';
 import LoginPage from '../components/login-page';
-import UserPage from '../containers/user-page';
+import AppPage from '../containers/app-page';
 
-export class App extends Component {
+export class Layout extends Component {
   componentWillMount() {
     this.props.authActions.readTokenFromCookies();
   }
 
   render() {
-    const auth = this.props.auth;
+    const { auth } = this.props
 
     switch (auth.state) {
       case AUTH_STATE_UNKNOWN:
@@ -24,7 +25,7 @@ export class App extends Component {
         return <LoginPage />
 
       case AUTH_STATE_AUTHENTICATED:
-        return <UserPage />
+        return <AppPage />
     }
   }
 }
@@ -41,4 +42,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
