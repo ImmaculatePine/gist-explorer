@@ -37,22 +37,24 @@ export default class GistViewer extends Component {
         <div className='box box-primary'>
           <div className='box-body'>
             <b>{title}</b>
-            <ul>
+            <div className='row'>
+              <div className='col-md-2'>
+                <i className='fa fa-tags'></i> Labels:
+              </div>
               {labels.map(
                 label => {
                   return (
-                    <li key={label.id}>
+                    <div className='col-md-2' key={label.id}>
                       <input
                         type='checkbox'
                         checked={this._hasLabel(label)}
                         onChange={() => { onLabelSelect(token, label.id, gist.id) }}
-                      />
-                      {label.name}
-                    </li>
+                      /> {label.name}
+                    </div>
                   )
                 }
               )}
-            </ul>
+            </div>
           </div>
         </div>
         {files}
