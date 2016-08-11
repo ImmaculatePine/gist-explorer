@@ -52,11 +52,11 @@ describe('components', () => {
   describe('App', () => {
     it('renders self', () => {
       const { wrapper } = setup();
-      expect(wrapper.find('Header')).to.be.defined;
-      expect(wrapper.find('Sidebar')).to.be.defined;
-      expect(wrapper.find('Footer')).to.be.defined;
-      expect(wrapper.find('GistsList')).to.be.defined;
-      expect(wrapper.find('GistViewer')).to.be.defined;
+      expect(wrapper.find('Header').length).to.equal(1);
+      expect(wrapper.find('Sidebar').length).to.equal(1);
+      expect(wrapper.find('Footer').length).to.equal(1);
+      expect(wrapper.find('GistsList').length).to.equal(1);
+      expect(wrapper.find('GistViewer').length).to.equal(1);
     });
 
     it('changes body class', () => {

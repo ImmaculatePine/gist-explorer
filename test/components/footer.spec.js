@@ -7,7 +7,7 @@ describe('components', () => {
   describe('Footer', () => {
     it('just renders self without any additional logic', () => {
       const wrapper = shallow(<Footer />);
-      expect(wrapper.find('footer')).to.be.defined;
+      expect(wrapper.find('footer').length).to.equal(1);
     });
   });
 });

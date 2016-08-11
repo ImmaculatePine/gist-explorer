@@ -42,6 +42,7 @@ describe('components/github', () => {
         expect(files.length).to.equal(2);
         expect(files.nodes[0].props.file.filename).to.equal('index.js');
         expect(files.nodes[1].props.file.filename).to.equal('other.js');
+        expect(wrapper.find('LabelsList').length).to.equal(1);
       });
     });
   });

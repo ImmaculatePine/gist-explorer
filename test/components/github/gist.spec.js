@@ -28,11 +28,11 @@ describe('components/github', () => {
   describe('Gist', () => {
     it('renders self with correct properties', () => {
       const wrapper = shallow(<Gist {...props} />);
-      expect(wrapper.find('i.fa-lock')).to.be.defined;
+      expect(wrapper.find('i.fa-lock').length).to.equal(1)
       expect(wrapper.find('.gist-title').text()).to.equal('index.js');
       expect(wrapper.find('.gist-created-at').text()).to.equal('Created a few seconds ago');
       expect(wrapper.find('.gist-description').text()).to.equal('This is a test gist');
-      expect(wrapper.find('.no-labels')).to.be.defined;
+      expect(wrapper.find('LabelsList').length).to.equal(1);
     });
   });
 });

@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import moment from 'moment';
+import LabelsList from '../labels-list';
 import File from './file';
 
 export default class GistViewer extends Component {
@@ -41,6 +43,22 @@ export default class GistViewer extends Component {
     const createdAt = moment(gist.createdAt).format(format);
     const updatedAt = moment(gist.updatedAt).format(format);
 
+    const labelsPopover = (
+      <Popover id='popover-positioned-scrolling-bottom' title='Edit gist labels'>
+        {labels.map(
+          label => (
+            <div key={label.id}>
+              <input
+                type='checkbox'
+                checked={this._hasLabel(label)}
+                onChange={() => { onLabelSelect(token, label.id, gist.id); }}
+              /> {label.name}
+            </div>
+          )
+        )}
+      </Popover>
+    );
+
     return (
       <div>
         <div className='box box-primary'>
@@ -56,21 +74,17 @@ export default class GistViewer extends Component {
                 {gist.owner.login}
               </a> on {createdAt} - Last updated {updatedAt}
             </p>
-            <div className='row'>
-              <div className='col-md-2'>
-                <i className='fa fa-tags' /> Labels:
-              </div>
-              {labels.map(
-                label => (
-                  <div className='col-md-2' key={label.id}>
-                    <input
-                      type='checkbox'
-                      checked={this._hasLabel(label)}
-                      onChange={() => { onLabelSelect(token, label.id, gist.id); }}
-                    /> {label.name}
-                  </div>
-                )
-              )}
+            <div>
+              <OverlayTrigger
+                container={this}
+                trigger='click'
+                placement='bottom'
+                overlay={labelsPopover}
+              >
+                <span className='label label-default'>
+                  <i className='fa fa-tags' /> Labels <i className='fa fa-caret-down' />
+                </span>
+              </OverlayTrigger> <LabelsList labels={gist.labels} />
             </div>
           </div>
           <div className='box-body'>

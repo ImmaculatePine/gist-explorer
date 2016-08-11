@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import LabelsList from '../labels-list';
 
 export default class Gist extends Component {
   render() {
@@ -16,11 +17,6 @@ export default class Gist extends Component {
       </span>);
     }
 
-    let labels = <span className='no-labels'>No labels</span>;
-    if (gist.labels.length) {
-      labels = gist.labels.map(label => label.name).join(', ');
-    }
-
     return (
       <li className={isActive ? 'active' : ''}>
         <a href='#' onClick={() => { onClick(gist.id); }}>
@@ -30,7 +26,7 @@ export default class Gist extends Component {
           <small className='gist-created-at'>Created {createdAtInWords}</small>
           <p className='gist-description'>{gist.description}</p>
           <div className='labels'>
-            <i className='fa fa-tags' /> {labels}
+            <i className='fa fa-tags' /> <LabelsList labels={gist.labels} />
           </div>
         </a>
       </li>
