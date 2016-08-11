@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import File from './file';
 
 export default class GistViewer extends Component {
@@ -36,11 +37,25 @@ export default class GistViewer extends Component {
       return (<File key={file.filename} file={file} />);
     });
 
+    const format = 'DD/MM/YYYY';
+    const createdAt = moment(gist.createdAt).format(format);
+    const updatedAt = moment(gist.updatedAt).format(format);
+
     return (
       <div>
         <div className='box box-primary'>
-          <div className='box-body'>
+          <div className='box-header with-border'>
             <b>{title}</b>
+            <p>
+              Created by {' '}
+              <a
+                href={gist.owner.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {gist.owner.login}
+              </a> on {createdAt} - Last updated {updatedAt}
+            </p>
             <div className='row'>
               <div className='col-md-2'>
                 <i className='fa fa-tags' /> Labels:
@@ -57,6 +72,9 @@ export default class GistViewer extends Component {
                 )
               )}
             </div>
+          </div>
+          <div className='box-body'>
+            {gist.description}
           </div>
         </div>
         {files}
