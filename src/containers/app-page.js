@@ -31,8 +31,8 @@ export class AppPage extends Component {
 
 AppPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  gistPreviewsActions: PropTypes.func.isRequired,
-  labelsActions: PropTypes.func.isRequired,
+  gistPreviewsActions: PropTypes.object.isRequired,
+  labelsActions: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => (
