@@ -3,3 +3,9 @@
 @import '~admin-lte/dist/css/AdminLTE.css';
 @import '~admin-lte/dist/css/skins/skin-blue.css';
 @import '~highlight.js/styles/default.css';
+
+.gist-viewer {
+  .labels-select-button {
+    cursor: pointer;
+  }
+}

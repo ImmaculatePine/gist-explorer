@@ -47,12 +47,15 @@ export default class GistViewer extends Component {
       <Popover id='popover-positioned-scrolling-bottom' title='Edit gist labels'>
         {labels.map(
           label => (
-            <div key={label.id}>
-              <input
-                type='checkbox'
-                checked={this._hasLabel(label)}
-                onChange={() => { onLabelSelect(token, label.id, gist.id); }}
-              /> {label.name}
+            <div key={label.id} className='checkbox'>
+              <label htmlFor={`label-${label.id}`}>
+                <input
+                  id={`label-${label.id}`}
+                  type='checkbox'
+                  checked={this._hasLabel(label)}
+                  onChange={() => { onLabelSelect(token, label.id, gist.id); }}
+                /> {label.name}
+              </label>
             </div>
           )
         )}
@@ -60,7 +63,7 @@ export default class GistViewer extends Component {
     );
 
     return (
-      <div>
+      <div className='gist-viewer'>
         <div className='box box-primary'>
           <div className='box-header with-border'>
             <b>{title}</b>
@@ -81,7 +84,7 @@ export default class GistViewer extends Component {
                 placement='bottom'
                 overlay={labelsPopover}
               >
-                <span className='label label-default'>
+                <span className='label label-default labels-select-button'>
                   <i className='fa fa-tags' /> Labels <i className='fa fa-caret-down' />
                 </span>
               </OverlayTrigger> <LabelsList labels={gist.labels} />
