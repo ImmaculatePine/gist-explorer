@@ -82,6 +82,5 @@ Use `npm test` command to run tests.
 
 # Next steps
 
-* Optimize webpack config for production builds
 * Add router
 * Improve UI
