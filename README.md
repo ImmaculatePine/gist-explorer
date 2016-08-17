@@ -12,6 +12,7 @@ It is split into 2 separate projects:
 ## Technologies stack
 
 Application: React + Redux
+
 Tests: Enzyme + Mocha + Chai
 
 ## Authentication
