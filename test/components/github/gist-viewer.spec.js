@@ -3,22 +3,38 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GistViewer from '../../../src/components/github/gist-viewer';
 
+const defaultProps = {
+  token: 'fake-token',
+  labels: [],
+  isFetching: false,
+  onLabelSelect: () => {},
+};
+
 describe('components/github', () => {
   describe('GistViewer', () => {
     describe('when gist is not selected', () => {
       it('shows loading message while fetching data', () => {
-        const wrapper = shallow(<GistViewer isFetching />);
+        const props = {
+          ...defaultProps,
+          isFetching: true,
+        }
+        const wrapper = shallow(<GistViewer {...props} />);
         expect(wrapper.find('.box-body').text()).to.equal('Loading...');
       });
 
       it('shows call-to-action message when data is not fetching', () => {
-        const wrapper = shallow(<GistViewer isFetching={false} />);
+        const props = {
+          ...defaultProps,
+          isFetching: false,
+        }
+        const wrapper = shallow(<GistViewer {...props} />);
         expect(wrapper.find('.box-body').text()).to.equal('Please, select a gist');
       });
     });
 
     describe('when gist is selected', () => {
       const props = {
+        ...defaultProps,
         gist: {
           files: {
             'index.js': {
@@ -28,12 +44,11 @@ describe('components/github', () => {
               filename: 'other.js',
             },
           },
+          labels: [],
           createdAt: new Date(),
           updatedAt: new Date(),
           owner: {},
         },
-        labels: [],
-        isFetching: false,
       };
 
       it('renders gist details', () => {
